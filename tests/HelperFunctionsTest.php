@@ -38,9 +38,7 @@ class HelperFunctionsTest extends TestCase
 
     protected function getPackageProviders($app)
     {
-        //$provider = new class() extends ServiceProvider { };
-
-        return []; //TestServiceProvider::class];
+        return [];
     }
 
     /**
