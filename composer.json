@@ -1,0 +1,41 @@
+{
+    "name": "permafrost-dev/laravel-helpers",
+    "description": "Useful helper functions and classes for Laravel",
+    "license": "MIT",
+    "require": {
+        "php": "^7.3"
+    },
+    "require-dev": {
+        "nunomaduro/phpinsights": "^1.14",
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Permafrost\\Helpers\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Permafrost\\Helpers\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "lint": "vendor/bin/php-cs-fixer fix ./src",
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "phpunit --coverage-html coverage"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Permafrost\\Helpers\\ProjectServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
