@@ -3,17 +3,23 @@
     "description": "Useful helper functions and classes for Laravel",
     "license": "MIT",
     "require": {
-        "php": "^7.3"
+        "php": "^7.3",
+        "illuminate/cache": "^7.21",
+        "illuminate/database": "^7.21"
     },
     "require-dev": {
-        "nunomaduro/phpinsights": "^1.14",
         "friendsofphp/php-cs-fixer": "^2.16",
+        "nunomaduro/phpinsights": "^1.14",
+        "orchestra/testbench": "^5.3",
         "phpunit/phpunit": "^9.0"
     },
     "autoload": {
         "psr-4": {
             "Permafrost\\Helpers\\": "src"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
@@ -22,8 +28,9 @@
     },
     "scripts": {
         "lint": "vendor/bin/php-cs-fixer fix ./src",
-        "test": "vendor/bin/phpunit",
-        "test-coverage": "phpunit --coverage-html coverage"
+        "test": "vendor/bin/phpunit --testdox",
+        "test-coverage": "phpunit --coverage-html coverage",
+        "insights": "vendor/bin/phpinsights analyse -c .phpinsights src"
     },
     "extra": {
         "laravel": {
