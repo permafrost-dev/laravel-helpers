@@ -2,12 +2,15 @@
 
 use Permafrost\Helpers\ModelHelper;
 use Permafrost\Helpers\RouteHelper;
+use Illuminate\Support\Facades\Validator;
 
 if (!function_exists('get_cached_model_ids')) {
     /**
      * Return an array of a model's id values, using cached values if available.
      *
-     * @throws \Exception
+     * @param string $modelClass
+     * @param int $ttlSeconds
+     * @param int $recordLimit
      *
      * @return array
      */
@@ -24,9 +27,13 @@ if (!function_exists('get_cached_model_columns')) {
     /**
      * Return an array of a model's column values, using cached values if available.
      *
+     * @param string $modelClass
+     * @param string $column
+     * @param int $ttlSeconds
+     * @param int $recordLimit
+     *
      * @return array
      *
-     * @throws \Exception
      */
     function get_cached_model_columns(string $modelClass, string $column, int $ttlSeconds = 30, int $recordLimit = -1): array
     {
@@ -62,6 +69,7 @@ if (!function_exists('get_model_ids')) {
      * @see \get_model_column()
      *
      * @param mixed $modelClass
+     * @param int $recordLimit
      *
      * @return array
      */
@@ -148,3 +156,57 @@ if (!function_exists('routepath')) {
         return RouteHelper::routepath($routepath);
     }
 }
+
+if (!function_exists('validate')) {
+    /**
+     * Validates $fields using the specified validation $rules.
+     *
+     * @param array|string|mixed $fields
+     * @param array|string $rules
+     *
+     * @return array
+     */
+    function validate($fields, $rules)
+    {
+        return validator_create($fields, $rules)->validate();
+    }
+}
+
+if (!function_exists('validated')) {
+    /**
+     * Returns true if the validation for $fields using the specified validation $rules passes.
+     *
+     * @param array|string|mixed $fields
+     * @param array|string $rules
+     *
+     * @return bool
+     */
+    function validated($fields, $rules)
+    {
+        return validator_create($fields, $rules)->passes();
+    }
+}
+
+if (!function_exists('validator_create')) {
+    /**
+     * Returns a validator instance using the specified fields and rules.
+     *
+     * @param array|string|mixed $fields
+     * @param array|string $rules
+     *
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    function validator_create($fields, $rules)
+    {
+        if (!is_array($fields)) {
+            $fields = ['default' => $fields];
+        }
+
+        if (!is_array($rules)) {
+            $rules = ['default' => $rules];
+        }
+
+        return Validator::make($fields, $rules);
+    }
+}
+
