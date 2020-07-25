@@ -41,11 +41,6 @@ class HelperFunctionsTest extends TestCase
         $this->router->getRoutes()->refreshNameLookups();
     }
 
-    protected function getPackageProviders($app)
-    {
-        return [];
-    }
-
     /**
      * Define environment setup.
      *
