@@ -52,12 +52,10 @@ class RouteHelper
     public static function relative(string $name, array $parameters = []): string
     {
         $route = route($name, $parameters);
-        $start = strpos($route, '://');
+        $start = strpos($route, '://') + 4;
+        $end = strpos($route, '/', $start);
 
-        $end = strpos($route, '/', $start !== false ? $start + 4 : 0);
-        $result = $end !== false ? substr($route, $end) : '/';
-
-        return empty($result) ? '/' : $result;
+        return $end !== false ? substr($route, $end) : '/';
     }
 
 }
